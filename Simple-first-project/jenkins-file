@@ -1,0 +1,14 @@
+pipeline {
+  agent {
+    docker { 
+      image 'openjdk:11' 
+    }
+  }
+  stages {
+    stage('Test Java Version') {
+      steps {
+        sh 'java -version'
+      }
+    }
+  }
+}
