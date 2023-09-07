@@ -1,37 +1,37 @@
 pipeline {
-    agent {
-        docker {
-            image 'nginx:latest'
-        }
-    }
+    agent any // Use any available Jenkins agent
+
     stages {
         stage('Front-end') {
+            agent {
+                docker {
+                    image 'nginx:latest'
+                }
+            }
             steps {
-                sh 'nginx -v'
+                sh 'echo "Front-end is running"'
             }
         }
 
-       stage('Back-end') {
-    agent {
-        docker {
-            image 'python:3.9'
+        stage('Back-end') {
+            agent {
+                docker {
+                    image 'node:14'
+                }
+            }
+            steps {
+                sh 'echo "Back-end is running"'
+            }
         }
-    }
-    steps {
-        sh 'echo "Before Python command"'
-        sh 'python -c "print(\'This is a Python backend\')"'
-        sh 'echo "After Python command"'
-    }
-}
 
-        stage('Data-Base') {
+        stage('Database') {
             agent {
                 docker {
                     image 'postgres:latest'
                 }
             }
             steps {
-                sh 'psql --version'
+                sh 'echo "Database is running"'
             }
         }
     }
