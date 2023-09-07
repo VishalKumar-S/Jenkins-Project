@@ -1,1 +1,36 @@
+pipeline {
+    agent {
+        docker {
+            image 'nginx:latest'
+        }
+    }
+    stages {
+        stage('Front-end') {
+            steps {
+                sh 'nginx -v'
+            }
+        }
 
+        stage('Back-end') {
+            agent {
+                docker {
+                    image 'python:3.9'
+                }
+            }
+            steps {
+                sh 'python -c "print(\'This is a Python backend\')"'
+            }
+        }
+
+        stage('Data-Base') {
+            agent {
+                docker {
+                    image 'postgres:latest'
+                }
+            }
+            steps {
+                sh 'psql --version'
+            }
+        }
+    }
+}
