@@ -1,0 +1,22 @@
+pipeline{
+  agent{
+   stages{
+    stage('Front-end'){
+      agent{
+}
+steps{
+}
+}
+       stage('Back-end'){
+      agent{
+}
+steps{
+}
+}
+
+       stage('Data-Base'){
+      agent{
+}
+steps{
+}
+}
