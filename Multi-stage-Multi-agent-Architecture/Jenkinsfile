@@ -11,16 +11,18 @@ pipeline {
             }
         }
 
-        stage('Back-end') {
-            agent {
-                docker {
-                    image 'python:3.9'
-                }
-            }
-            steps {
-                sh 'python -c "print(\'This is a Python backend\')"'
-            }
+       stage('Back-end') {
+    agent {
+        docker {
+            image 'python:3.9'
         }
+    }
+    steps {
+        sh 'echo "Before Python command"'
+        sh 'python -c "print(\'This is a Python backend\')"'
+        sh 'echo "After Python command"'
+    }
+}
 
         stage('Data-Base') {
             agent {
