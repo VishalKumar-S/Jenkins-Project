@@ -10,7 +10,7 @@ pipeline {
         
         stage('Checkout Jenkinsfile'){
            steps {
-                git credentialsId: 'c7703029-5bed-4e09-815c-65af8d4f9006', 
+                git credentialsId: '6383358799', 
                 url: 'https://github.com/VishalKumar-S/Jenkins-Project',
                 branch: 'main'
            }
@@ -40,7 +40,7 @@ pipeline {
         
         stage('Checkout Kubernetes Manifest SCM'){
             steps {
-                git credentialsId: 'c7703029-5bed-4e09-815c-65af8d4f9006', 
+                git credentialsId: '6383358799', 
                 url: 'https://github.com/VishalKumar-S/Argo-cd-cicd-project-manifest-repo.git',
                 branch: 'main'
             }
@@ -49,7 +49,7 @@ pipeline {
         stage('Update Kubernetes manifest & push to Repo'){
             steps {
                 script{
-                    withCredentials([usernamePassword(credentialsId: 'c7703029-5bed-4e09-815c-65af8d4f9006', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    withCredentials([usernamePassword(credentialsId: '6383358799', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh '''
                         cat deploy.yaml
                         sed -i '' "s/32/${BUILD_NUMBER}/g" deploy.yaml
