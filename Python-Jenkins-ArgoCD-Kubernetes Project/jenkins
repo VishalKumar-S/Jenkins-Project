@@ -16,16 +16,19 @@ pipeline {
            }
         }
 
-        stage('Build Docker'){
-            steps{
-                script{
-                    sh '''
-                    echo 'Build Docker Image'
-                    docker build -t vishal-docker-image:${BUILD_NUMBER} .
-                    '''
-                }
+        stage('Build Docker') {
+    steps {
+        dir('Jenkins-Project/Python-Jenkins-ArgoCD-Kubernetes Project') {
+            script {
+                sh '''
+                echo Build Docker Image
+                docker build -t vishal-docker-image:${BUILD_NUMBER} .
+                '''
             }
         }
+    }
+}
+
 
         stage('Push the artifacts'){
            steps{
