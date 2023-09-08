@@ -8,10 +8,10 @@ pipeline {
     
     stages {
         
-        stage('Checkout'){
+        stage('Checkout Jenkinsfile'){
            steps {
-                git credentialsId: '210ee438-c6d2-4a64-aed1-79b5606db359', 
-                url: 'https://github.com/VishalKumar-S/Jenkins-Project.git',
+                git credentialsId: 'c7703029-5bed-4e09-815c-65af8d4f9006', 
+                url: 'https://github.com/VishalKumar-S/Jenkins-Project',
                 branch: 'main'
            }
         }
@@ -20,7 +20,7 @@ pipeline {
             steps{
                 script{
                     sh '''
-                    echo 'Buid Docker Image'
+                    echo 'Build Docker Image'
                     docker build -t vishal-docker-image:${BUILD_NUMBER} .
                     '''
                 }
@@ -38,18 +38,18 @@ pipeline {
             }
         }
         
-        stage('Checkout K8S manifest SCM'){
+        stage('Checkout Kubernetes Manifest SCM'){
             steps {
-                git credentialsId: '210ee438-c6d2-4a64-aed1-79b5606db359', 
+                git credentialsId: 'c7703029-5bed-4e09-815c-65af8d4f9006', 
                 url: 'https://github.com/VishalKumar-S/Argo-cd-cicd-project-manifest-repo.git',
                 branch: 'main'
             }
         }
         
-        stage('Update K8S manifest & push to Repo'){
+        stage('Update Kubernetes manifest & push to Repo'){
             steps {
                 script{
-                    withCredentials([usernamePassword(credentialsId: '210ee438-c6d2-4a64-aed1-79b5606db359', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    withCredentials([usernamePassword(credentialsId: 'c7703029-5bed-4e09-815c-65af8d4f9006', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh '''
                         cat deploy.yaml
                         sed -i '' "s/32/${BUILD_NUMBER}/g" deploy.yaml
