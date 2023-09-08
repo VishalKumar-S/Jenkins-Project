@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout'){
            steps {
                 git credentialsId: 'c7703029-5bed-4e09-815c-65af8d4f9006', 
-                url: 'https://github.com/VishalKumar-S/Jenkins-Project/tree/main/Python-Jenkins-ArgoCD-Kubernetes%20Project',
+                url: 'https://github.com/VishalKumar-S/Jenkins-Project.git',
                 branch: 'main'
            }
         }
